@@ -1,6 +1,8 @@
 # ngx-table-descartes
 Angular descartes table component
 
+![example](https://raw.githubusercontent.com/petkit-io/assets/master/ngx-table-descartes.png)
+
 # Installation
 
 ```bash
