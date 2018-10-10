@@ -15,7 +15,9 @@
     },
     "whitelistedNonPeerDependencies": []
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "lodash-es": "^4.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/petkit-io/ngx-table-descartes.git"
