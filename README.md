@@ -31,6 +31,7 @@ import {
 
 ```ts
 import { Component, OnInit } from '@angular/core';
+// mock data
 import Mock from 'mockjs';
 
 @Component({
@@ -39,7 +40,7 @@ import Mock from 'mockjs';
   styleUrls: ['./table-descartes-simple.component.scss']
 })
 export class TableDescartesSimpleComponent implements OnInit {
-  data = Mock.mock({
+  data: {[key: string]: string}[] = Mock.mock({
     'data|10-20': [{
       'type|1': ['typeA', 'typeB', 'typeC'],
       'size|1': ['big', 'middle', 'small'],
