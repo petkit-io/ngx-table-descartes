@@ -12,6 +12,11 @@ import {
   isArray,
 } from 'lodash-es';
 import {
+  Observable,
+  of,
+  combineLatest,
+} from 'rxjs';
+import {
   ITableDescartesTable,
 } from './table-descartes.interface';
 
@@ -22,33 +27,47 @@ import {
 })
 export class TableDescartesComponent implements OnInit {
   @Input()
-  data: {[key: string]: string}[] = [];
+  data: Observable<{[key: string]: string}[]> = of([]);
   @Input()
-  order: string[];
+  order: Observable<string[] | null> = of(null);
   @Input()
   tpl: TemplateRef<any>;
 
-  aoaData: {[key: string]: string}[][];
+
+  orderData: {[key: string]: string}[][];
+  aoaData: string[][];
   table: ITableDescartesTable[][] = [];
 
   constructor() {
   }
 
   ngOnInit() {
-    const order = this.getOrder(this.data);
-    const orderData = orderBy(this.data, order);
-    const aoaData = this.getAoA(orderData, order);
+    combineLatest([
+      this.data,
+      this.order,
+    ]).subscribe(([data, order]) => {
+      if (!isArray(data)) {
+        return;
+      }
 
-    this.aoaData = aoaData;
-    this.table = this.format(aoaData);
+      const _order = order || (data[0] && keys(data[0]) || null);
+      if (!isArray(_order)) {
+        return;
+      }
+
+      const orderData = orderBy(data, _order);
+      this.orderData = orderData;
+
+      const aoaData = this.getAoA(orderData, _order);
+      this.aoaData = aoaData;
+
+      this.table = this.format(aoaData);
+    });
+
   }
 
-  getOrder(data: object[]): any[] {
-    return this.order || keys(data[0]);
-  }
-
-  getAoA(AoO: object[], order: any[]) {
-    return AoO.map(row => order.map(key => row[key]));
+  getAoA(AoO: object[], order: any[]): string[][] {
+    return AoO.map(row => order.map(key => row[key]).filter(key => key !== undefined));
   }
 
   format(data: any[][]): any[][] {

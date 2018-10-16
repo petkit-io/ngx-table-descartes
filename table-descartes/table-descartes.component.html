@@ -2,7 +2,7 @@
   <tr *ngFor="let row of table; index as i;">
     <td class="ngx-table-descartes__td" *ngFor="let cell of row" [attr.rowspan]="cell.rowspan">
       <ng-container *ngIf="tpl">
-        <ng-container *ngTemplateOutlet="tpl; context: {cell: cell, row: aoaData[i]};"></ng-container>
+        <ng-container *ngTemplateOutlet="tpl; context: {cell: cell, row: aoaData[i], obj: orderData[i]};"></ng-container>
       </ng-container>
       <ng-container *ngIf="!tpl">{{cell.content}}</ng-container>
     </td>
