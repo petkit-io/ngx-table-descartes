@@ -1,3 +1,13 @@
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/petkit-io/ngx-table-descartes/compare/v1.0.3...v1.0.4) (2018-10-16)
+
+
+### Features
+
+* **descartes:** add cell key ([9b1cb85](https://github.com/petkit-io/ngx-table-descartes/commit/9b1cb85))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/petkit-io/ngx-table-descartes/compare/v1.0.2...v1.0.3) (2018-10-16)
 
