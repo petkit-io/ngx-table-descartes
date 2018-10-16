@@ -30,6 +30,7 @@ export class TableDescartesComponent implements OnInit {
   data: Observable<{[key: string]: string}[]> = of([]);
   @Input()
   order: Observable<string[] | null> = of(null);
+  private _order: string[] | null;
   @Input()
   tpl: TemplateRef<any>;
 
@@ -51,6 +52,7 @@ export class TableDescartesComponent implements OnInit {
       }
 
       const _order = order || (data[0] && keys(data[0]) || null);
+      this._order = _order;
       if (!isArray(_order)) {
         return;
       }
@@ -94,6 +96,7 @@ export class TableDescartesComponent implements OnInit {
       const firstCol = {
         content: firstCols[0],
         rowspan: firstCols.length,
+        key: this._order ? this._order[this._order.length - _data[0].length - 1] : null,
       };
 
       const next = this.format(_data);
